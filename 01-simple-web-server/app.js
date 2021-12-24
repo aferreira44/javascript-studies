@@ -1,19 +1,18 @@
 // https://nodejs.org/en/docs/guides/getting-started-guide/
 
-const http = require("http");
+const express = require("express");
+const app = express();
 
-const hostname = "127.0.0.1";
-const port = 3000;
+const hostname = process.env.HOSTNAME;
+const port = process.env.PORT;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
-  res.end("Hello World");
+app.get("/", (req, res) => {
+  res.send("Hello World");
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+const server = app.listen(port, () =>
+  console.log(`Server running at http://${hostname}:${port}/`)
+);
 
 process.on("SIGTERM", () => {
   server.close(() => {
