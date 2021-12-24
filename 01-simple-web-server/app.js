@@ -1,5 +1,6 @@
 // https://nodejs.org/en/docs/guides/getting-started-guide/
 
+require('dotenv').config();
 const express = require("express");
 const app = express();
 
